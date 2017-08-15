@@ -11,12 +11,6 @@
     - mod_security
     - policycoreutils-python
 
-- name: httpd/correct the nss conf file from port 8443
-  replace:
-    path: /etc/httpd/conf.d/nss.conf
-    regexp: '^Listen 8443'
-    replace: 'Listen 443'
-
 - name: httpd/httpd.conf
   template:
     src: httpd.conf
