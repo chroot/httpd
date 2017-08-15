@@ -11,7 +11,7 @@ This role is designed for EL 7 / CentOS 7
 Role Variables
 --------------
 
-companyName: example.com
+None
 
 Dependencies
 ------------
@@ -31,7 +31,7 @@ If you require this role for your application you can use the following 'requirm
 
 requirments.yml
     # pull down common roles
-      - src: git@github.com:chroot/httpd.git
+      - src: git@code.bridgevine.io:ans-app/httpd.git
         name: httpd
         version: master
         scm: git
@@ -43,4 +43,3 @@ License
 -------
 
 BSD
-# httpd
