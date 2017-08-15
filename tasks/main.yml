@@ -13,7 +13,7 @@
 
 - name: httpd/httpd.conf
   template:
-    src: httpd.conf
+    src: httpd.conf.j2
     dest: /etc/httpd/conf/httpd.conf
     owner: root
     group: root
