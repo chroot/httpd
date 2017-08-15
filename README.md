@@ -31,7 +31,7 @@ If you require this role for your application you can use the following 'requirm
 
 requirments.yml
     # pull down common roles
-      - src: git@code.bridgevine.io:ans-app/httpd.git
+      - src: git@github.com:chroot/httpd.git
         name: httpd
         version: master
         scm: git
