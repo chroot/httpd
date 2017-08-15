@@ -1,0 +1,54 @@
+---
+- name: httpd/package - install packages
+  yum:
+    state: present
+    name: "{{ item }}"
+    disable_gpg_check: yes
+  with_items:
+    - httpd
+    - mariadb
+    - mod_ssl
+    - mod_security
+    - policycoreutils-python
+
+- name: httpd/correct the nss conf file from port 8443
+  replace:
+    path: /etc/httpd/conf.d/nss.conf
+    regexp: '^Listen 8443'
+    replace: 'Listen 443'
+
+- name: httpd/httpd.conf
+  template:
+    src: httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: 0600
+    serole: object_r
+    setype: httpd_config_t
+    seuser: system_u
+    selevel: s0
+
+- name: httpd/Firewall being configured for http
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+
+- name: httpd/Firewall being configured for http
+  firewalld:
+    service: https
+    permanent: true
+    state: enabled
+
+- name: httpd/delete the welcome site
+  file:
+    path: /etc/httpd/conf.d/welcome.conf
+    state: absent
+
+- name: httpd/enable the service
+  service:
+    name: httpd
+    enabled: yes
+    state: started
+  notify: restart httpd
