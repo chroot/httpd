@@ -34,6 +34,7 @@
     service: https
     permanent: true
     state: enabled
+  notify: restart firewalld
 
 - name: httpd/delete the welcome site
   file:
